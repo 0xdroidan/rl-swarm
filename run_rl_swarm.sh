@@ -31,7 +31,7 @@ DEFAULT_IDENTITY_PATH="$ROOT"/swarm.pem
 IDENTITY_PATH=${IDENTITY_PATH:-$DEFAULT_IDENTITY_PATH}
 
 # Will ignore any visible GPUs if set.
-CPU_ONLY=${CPU_ONLY:-""}
+CPU_ONLY=${CPU_ONLY:-"1"}
 
 # Set if successfully parsed from modal-login/temp-data/userData.json.
 ORG_ID=${ORG_ID:-""}
@@ -132,10 +132,10 @@ if [ "$CONNECT_TO_TESTNET" = "True" ]; then
     sleep 5
     
     # Try to open the URL in the default browser
-    if open http://localhost:3000 2>/dev/null; then
-        echo_green ">> Successfully opened http://localhost:3000 in your default browser."
+    if open http://localhost:3100 2>/dev/null; then
+        echo_green ">> Successfully opened http://localhost:3100 in your default browser."
     else
-        echo ">> Failed to open http://localhost:3000. Please open it manually."
+        echo ">> Failed to open http://localhost:3100. Please open it manually."
     fi
     
     cd ..
@@ -152,7 +152,7 @@ if [ "$CONNECT_TO_TESTNET" = "True" ]; then
     # Wait until the API key is activated by the client
     echo "Waiting for API key to become activated..."
     while true; do
-        STATUS=$(curl -s "http://localhost:3000/api/get-api-key-status?orgId=$ORG_ID")
+        STATUS=$(curl -s "http://localhost:3100/api/get-api-key-status?orgId=$ORG_ID")
         if [[ "$STATUS" == "activated" ]]; then
             echo "API key is activated! Proceeding..."
             break
